@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/nileshgokhalepune/responsive/issues"
   },
-  "homepage": "https://github.com/nileshgokhalepune/responsive#readme"
+  "homepage": "https://github.com/nileshgokhalepune/responsive#readme",
+  "dependencies": {
+    "bower": "^1.7.9",
+    "express": "^4.14.0"
+  }
 }
