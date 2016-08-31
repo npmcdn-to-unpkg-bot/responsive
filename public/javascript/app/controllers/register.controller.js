@@ -8,7 +8,7 @@
     function registerCtrl($scope, $state, DataSvc) {
         $scope.userInfo = {};
         $scope.sellocation;
-
+        $scope.userNameUnavailable;
         $scope.register = function () {
             DataSvc.registerUser($scope.userInfo).then(function (response) {
                 debugger;
@@ -38,6 +38,38 @@
             $scope.sellocation = location.description;
             $scope.locations = [];
             $event.preventDefault();
+        }
+
+        $scope.isNameAvailable = function ($event) {
+            DataSvc.isNameAvailable($scope.userInfo.userName).then(function (response) {
+                if(response.data.success == true){
+                    $scope.userNameUnavailable = false;
+                }else{
+                    $scope.userNameUnavailable = true;
+                }
+            }, function (error) {
+
+            });
+        }
+        
+        $scope.isEmailUnique = function($event){
+            DataSvc.checkEmailExists($scope.userInfo.email).then(function(response){
+               if(response.data.success == true){
+                   $scope.emailExists = true;
+               } else{
+                   $scope.emailExists = false;
+               }
+            },function(error){
+                
+            });
+        }
+        
+        $scope.register = function(){
+            DataSvc.registerUser($scope.userInfo).then(function(response){
+                
+            },function(error){
+                
+            })
         }
     }
 })();

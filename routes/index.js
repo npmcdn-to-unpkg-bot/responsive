@@ -9,8 +9,32 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/user/save', function (req, res, next) {
-    userlib.save(req.body.userInfo, function (result) {
+    userlib.save(req.body.userInfo, function (err) {
+        if (err) {
+            return res.json({ success: false, message: 'Failed to register you at this time' });
+        } else {
+            return res.json({ success: true, message: 'Ready to rock' });
+        }
+    });
+});
 
+router.get('/user/exists/:search', function (req, res, next) {
+    userlib.find({ userName: req.params.search }, function (result) {
+        if (result) {
+            return res.json({ success: false });
+        } else {
+            return res.json({ success: true });
+        }
+    })
+});
+
+router.get('/user/email/exists/:email', function (req, res, next) {
+    userlib.find({ email: req.params.email }, function (result) {
+        if (result) {
+            return res.json({ success: 'false', message: true });
+        } else {
+            return res.json({ success: 'true', message: false });
+        }
     });
 });
 

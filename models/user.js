@@ -24,7 +24,7 @@ var userSchema = new Schema({
         type: String,
         required: true
     },
-    location: String,
+    location: Object,
     dateOfBirth: String
 });
 

@@ -7,7 +7,9 @@
     function dataSvc($http) {
         this.getLocations = getLocations;
         this.registerUser = registerUser;
-        
+        this.isNameAvailable = isNameAvailable;
+        this.checkEmailExists = checkEmailExists;
+
         function getLocations(searchText) {
             return $http({
                 url: '/locations/find/' + searchText,
@@ -19,8 +21,22 @@
             return $http({
                 url: '/user/save',
                 method: 'POST',
-                data: userInfo
+                data: { userInfo: userInfo }
             });
+        }
+
+        function isNameAvailable(name) {
+            return $http({
+                url: '/user/exists/' + name,
+                method: 'GET'
+            });
+        }
+        
+        function checkEmailExists(email){
+            return $http({
+                url: '/user/email/exists/' + email,
+                method: 'GET'
+            });            
         }
     }
 })();

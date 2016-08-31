@@ -2,14 +2,16 @@ form(class="form-group")
     div(class="row")
         div(class="col-8-sm")
         div(class="col-4-sm")
-            label(class="label label-default") UserName
-            input(type="text",class="form-control",ng-model="userInfo.userName",required)
+            div
+                label(class="label label-default") UserName
+                input(type="text",class="form-control",ng-model="userInfo.userName",required,ng-keyup="isNameAvailable($event)")
+                span(ng-if="userNameUnavailable") UserName already taken.
             label(class="label label-default") First Name
             input(type="text",class="form-control",ng-model="userInfo.firstName",required)
             label(class="label label-default") Last Name
             input(type="text",class="form-control",ng-model="userInfo.lastName",required)
             label(class="label label-default") Email
-            input(type="text",class="form-control",ng-model="userInfo.email",required,pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")
+            input(type="text",class="form-control",ng-model="userInfo.email",required,pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$",ng-change="isEmailUnique()")
             label(class="label label-default") Gender
             select(class="form-control",ng-model="userInfo.gender",required)
                 option(value="M") Male
@@ -21,12 +23,12 @@ form(class="form-group")
             input(type="text",class="form-control",ng-model="userInfo.ethnicity")
             label(class="label label-default") Location
             input(type="text",class="form-control",ng-model="sellocation",required,ng-keyup="searchLocation($event)")
-            label(class="label label-default") Password
-            input(type="password",class="form-control",ng-model="userInfo.password")
-            label(class="label label-default") Confirm Password
-            input(type="confirmPassword",class="form-control",ng-model="confirmPassword")            
-            div
+            div(class="ontop")
                 ul(class="list-group")
                     li(ng-repeat="l in locations",class="list-group-item")
                         a(href="#",ng-click="selectLocation(l,$event)") {{l.description}}
-            button(class="btn btn-default") Register
+            label(class="label label-default") Password
+            input(type="password",class="form-control",ng-model="userInfo.password")
+            label(class="label label-default") Confirm Password
+            input(type="password",class="form-control",ng-model="confirmPassword")
+            button(class="btn btn-default",ng-click="register()") Register
