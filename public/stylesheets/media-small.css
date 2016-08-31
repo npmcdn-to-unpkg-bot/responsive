@@ -1,0 +1,47 @@
+.header {
+    display: flex;
+}
+
+body {
+    background-color: lightblue!important;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.box {
+    width: 100%;
+    padding: 4px;
+}
+
+@media screen and (min-width:450px) {
+    .left {
+        width: 25%;
+    }
+    .center {
+        width: 75%
+    }
+}
+
+@media screen and (min-width:550px) {
+    .left,
+    .right {
+        width: 25%
+    }
+    .center {
+        width: 50%;
+    }
+    .left {
+        left: 1;
+    }
+    .right {
+        right: 1;
+    }
+}
+
+.inline {
+    display: inline-block!important;
+    margin: 4px!important;
+}

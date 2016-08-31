@@ -4,7 +4,7 @@
   "description": "A responsive dating site",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
   "repository": {
     "type": "git",
@@ -20,7 +20,15 @@
   },
   "homepage": "https://github.com/nileshgokhalepune/responsive#readme",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "bower": "^1.7.9",
-    "express": "^4.14.0"
+    "debug": "^2.2.0",
+    "express": "^4.14.0",
+    "http": "0.0.0",
+    "jade": "^1.11.0",
+    "mongoose": "^4.5.10",
+    "morgan": "^1.7.0",
+    "path": "^0.12.7",
+    "request": "^2.74.0"
   }
 }
