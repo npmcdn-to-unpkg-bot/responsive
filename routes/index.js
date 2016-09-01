@@ -5,13 +5,13 @@ var database = require('../config/database');
 var userlib = require('../lib/userlib');
 
 router.get('/', function (req, res, next) {
-    res.render('index', { title: 'Network' });
+    res.render('index', { title: 'Netork' });
 });
 
 router.post('/user/save', function (req, res, next) {
-    userlib.save(req.body.userInfo, function (err) {
+    userlib.save(req.body.userInfo, function (err, msg) {
         if (err) {
-            return res.json({ success: false, message: 'Failed to register you at this time' });
+            return res.json({ success: false, message: msg });
         } else {
             return res.json({ success: true, message: 'Ready to rock' });
         }
@@ -31,9 +31,9 @@ router.get('/user/exists/:search', function (req, res, next) {
 router.get('/user/email/exists/:email', function (req, res, next) {
     userlib.find({ email: req.params.email }, function (result) {
         if (result) {
-            return res.json({ success: false });
-        } else {
             return res.json({ success: true });
+        } else {
+            return res.json({ success: false });
         }
     });
 });

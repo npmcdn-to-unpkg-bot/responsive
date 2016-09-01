@@ -3,9 +3,9 @@
 
     angular.module('dating').controller('registerCtrl', registerCtrl);
 
-    registerCtrl.$inject = ['$scope', '$state', 'DataSvc'];
+    registerCtrl.$inject = ['$scope', '$state', 'DataSvc', 'toastr'];
 
-    function registerCtrl($scope, $state, DataSvc) {
+    function registerCtrl($scope, $state, DataSvc, toastr) {
         $scope.userInfo = {};
         $scope.sellocation;
         $scope.userNameUnavailable;
@@ -42,33 +42,34 @@
 
         $scope.isNameAvailable = function ($event) {
             DataSvc.isNameAvailable($scope.userInfo.userName).then(function (response) {
-                if(response.data.success == true){
-                    $scope.userNameUnavailable = false;
-                }else{
-                    $scope.userNameUnavailable = true;
+                if (response.data.success == true) {
+                    toastr.warning('Username already exists'); 
                 }
             }, function (error) {
 
             });
         }
-        
-        $scope.isEmailUnique = function($event){
-            DataSvc.checkEmailExists($scope.userInfo.email).then(function(response){
-               if(response.data.success == true){
-                   $scope.emailExists = true;
-               } else{
-                   $scope.emailExists = false;
-               }
-            },function(error){
-                
+
+        $scope.isEmailExists = function ($event) {
+            DataSvc.checkEmailExists($scope.userInfo.email).then(function (response) {
+                if (response.data.success == true) { 
+                    toastr.warning('Email already exists'); 
+                }
+            }, function (error) {
+
             });
         }
-        
-        $scope.register = function(){
-            DataSvc.registerUser($scope.userInfo).then(function(response){
-                
-            },function(error){
-                
+
+        $scope.register = function () {
+            if($scope.registerForm && $scope.registerForm.$invalid){
+                return;
+            }
+            DataSvc.registerUser($scope.userInfo).then(function (response) {
+                if(!response.data.success){
+                    toastr.error(response.data.message);
+                }
+            }, function (error) {
+
             })
         }
     }

@@ -1,19 +1,15 @@
-form(class="form-group")
+form(name="registerForm",class="form-group")
     div(class="row")
         div(class="col-8-sm")
-        div(class="col-4-sm")
-            div
-                label(class="label label-default") UserName
-                input(type="text",class="form-control",ng-model="userInfo.userName",required,ng-keyup="isNameAvailable($event)")
-                span(ng-if="userNameUnavailable") UserName already taken.
+        div(class="col-4-sm") 
+            label(class="label label-default") UserName
+            input(type="text",class="form-control",ng-model="userInfo.userName",required,ng-keyup="isNameAvailable($event)") 
             label(class="label label-default") First Name
             input(type="text",class="form-control",ng-model="userInfo.firstName",required)
             label(class="label label-default") Last Name
             input(type="text",class="form-control",ng-model="userInfo.lastName",required)
-            div
-                label(class="label label-default") Email
-                input(type="text",class="form-control",ng-model="userInfo.email",required,pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$",ng-change="isEmailUnique()")
-                span(ng-if="emailExists") Email already registered.
+            label(class="label label-default") Email
+            input(type="text",class="form-control",ng-model="userInfo.email",required,pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$",ng-change="isEmailExists()") 
             label(class="label label-default") Gender
             select(class="form-control",ng-model="userInfo.gender",required)
                 option(value="M") Male
@@ -30,7 +26,7 @@ form(class="form-group")
                     li(ng-repeat="l in locations",class="list-group-item")
                         a(href="#",ng-click="selectLocation(l,$event)") {{l.description}}
             label(class="label label-default") Password
-            input(type="password",class="form-control",ng-model="userInfo.password")
+            input(type="password",class="form-control",ng-model="userInfo.password",required)
             label(class="label label-default") Confirm Password
-            input(type="password",class="form-control",ng-model="confirmPassword")
+            input(type="password",class="form-control",ng-model="confirmPassword",required)
             button(class="btn btn-default",ng-click="register()") Register
