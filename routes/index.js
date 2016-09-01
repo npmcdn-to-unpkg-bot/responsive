@@ -21,9 +21,9 @@ router.post('/user/save', function (req, res, next) {
 router.get('/user/exists/:search', function (req, res, next) {
     userlib.find({ userName: req.params.search }, function (result) {
         if (result) {
-            return res.json({ success: false });
-        } else {
             return res.json({ success: true });
+        } else {
+            return res.json({ success: false });
         }
     })
 });
@@ -31,9 +31,9 @@ router.get('/user/exists/:search', function (req, res, next) {
 router.get('/user/email/exists/:email', function (req, res, next) {
     userlib.find({ email: req.params.email }, function (result) {
         if (result) {
-            return res.json({ success: 'false', message: true });
+            return res.json({ success: false });
         } else {
-            return res.json({ success: 'true', message: false });
+            return res.json({ success: true });
         }
     });
 });

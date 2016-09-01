@@ -10,8 +10,10 @@ form(class="form-group")
             input(type="text",class="form-control",ng-model="userInfo.firstName",required)
             label(class="label label-default") Last Name
             input(type="text",class="form-control",ng-model="userInfo.lastName",required)
-            label(class="label label-default") Email
-            input(type="text",class="form-control",ng-model="userInfo.email",required,pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$",ng-change="isEmailUnique()")
+            div
+                label(class="label label-default") Email
+                input(type="text",class="form-control",ng-model="userInfo.email",required,pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$",ng-change="isEmailUnique()")
+                span(ng-if="emailExists") Email already registered.
             label(class="label label-default") Gender
             select(class="form-control",ng-model="userInfo.gender",required)
                 option(value="M") Male
