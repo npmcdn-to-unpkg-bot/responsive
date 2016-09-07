@@ -7,9 +7,11 @@
     authSvc.$inject = ['$http', '$log'];
 
     function authSvc($http, $log) {
-        this.login = login;
-        this.getToken = getToken;
-        this.isAuthenticated = isAuthenticated;
+        var service = this;
+        service.login = login;
+        service.getToken = getToken;
+        service.isAuthenticated = isAuthenticated;
+        service.user = {};
         function login(loginInfo, cb) {
             $http({
                 url: '/auth/login',
@@ -18,6 +20,7 @@
             }).then(function (response) {
                 if (response.data.success) {
                     setAuth(response.data);
+                    cb(true);
                 }
             });
         }
@@ -25,7 +28,8 @@
 
         function setAuth(data) {
             window.localStorage['token'] = data.token;
-            $http.defaults.headers.common.Authorization = data.token;
+            $http.defaults.headers.common.Authorization = "Bearer " + data.token;
+            service.user = data.user;
         }
 
         function getToken() {
