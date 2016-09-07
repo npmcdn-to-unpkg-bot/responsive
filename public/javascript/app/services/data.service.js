@@ -9,6 +9,7 @@
         this.registerUser = registerUser;
         this.isNameAvailable = isNameAvailable;
         this.checkEmailExists = checkEmailExists;
+        this.checkmates = checkmates;
 
         function getLocations(searchText) {
             return $http({
@@ -31,12 +32,19 @@
                 method: 'GET'
             });
         }
-        
-        function checkEmailExists(email){
+
+        function checkEmailExists(email) {
             return $http({
                 url: '/user/email/exists/' + email,
                 method: 'GET'
-            });            
+            });
+        }
+
+        function checkmates() {
+            return $http({
+                url: '/matches',
+                method: 'GET'
+            });
         }
     }
 })();

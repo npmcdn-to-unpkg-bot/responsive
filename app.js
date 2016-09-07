@@ -3,29 +3,41 @@ var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport');
+var jwt = require('jsonwebtoken');
 
-var database = require('./config/database');
+var database = require('./config/config');
+var userlib = require('./lib/userlib');
+
 var routes = require('./routes/index');
 var auth = require('./routes/auth');
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(logger('dev')); 
+app.use(logger('dev'));
+//Use body parser to get POST requests for API use
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set('base', '/');
+
+//Initialize passport
+app.use(passport.initialize());
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'public')));
 
+require('./lib/passport')(passport);
 app.use('/', routes);
-app.use('/auth',auth);
+app.use('/auth', auth);
 
 mongoose.connect(database.url);
 var db = mongoose.connection;
+
 
 db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', function () {

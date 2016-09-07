@@ -3,22 +3,23 @@
 
     angular.module('dating').controller('loginCtrl', loginCtrl);
 
-    loginCtrl.$inject = ['$scope', '$state', 'authSvc'];
+    loginCtrl.$inject = ['$scope', '$state', 'authSvc', 'toastr'];
 
-    function loginCtrl($scope, $state, authSvc) {
+    function loginCtrl($scope, $state, authSvc, toastr) {
         $scope.loginInfo = {};
 
         $scope.login = function () {
-            authSvc.login($scope.loginInfo).then(function (res) {
-                if(res.data.status == false){
-                    //show message from server
+            authSvc.login($scope.loginInfo, function (result) {
+                if (result) {
+                    toastr.success("Lets rock");
+                    $state.go('home');
+                } else {
+                    toastr.error("Login failed");
                 }
-            }, function (err) {
-                debugger;
             });
         }
-        
-        $scope.navigateTo = function(){
+
+        $scope.navigateTo = function () {
             $state.go('register')
         }
     }

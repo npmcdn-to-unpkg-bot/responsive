@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
-var database = require('../config/database');
+var database = require('../config/config');
 var userlib = require('../lib/userlib');
 
 router.get('/', function (req, res, next) {
@@ -54,4 +54,9 @@ router.get('/locations/find/:search', function (req, res, next) {
             res.json(places.predictions);
         });
 });
+
+router.get('/matches', function (req, res, next) {
+    userlib.getMatchList();
+});
+
 module.exports = router;
