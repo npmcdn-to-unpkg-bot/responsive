@@ -1,6 +1,7 @@
 (function () {
 
-    angular.module('dating').config(function ($stateProvider, $urlRouterProvider) {
+    angular.module('dating').config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+        $httpProvider.interceptors.push('httpInterceptor');
         $urlRouterProvider.otherwise('/home');
 
         $stateProvider
