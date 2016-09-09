@@ -11,6 +11,7 @@ var jwtAuth = require('./lib/jwtAuth');
 var others = require('./routes/other')
 var routes = require('./routes/index');
 var auth = require('./routes/auth');
+var helmet = require('helmet');
 var app = express();
 
 
@@ -19,6 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.set('jwtSecret', config.secret);
 
+app.use(helmet());
 app.use(logger('dev'));
 //Use body parser to get POST requests for API use
 app.use(bodyParser.json());
@@ -32,7 +34,6 @@ app.use(passport.initialize());
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 app.all('/api/*', [bodyParser(), jwtAuth]);
 //app.all('/auth/*', [bodyParser(), jwtAuth]);
 
@@ -44,11 +45,10 @@ app.use('/auth', auth);
 mongoose.connect(config.url);
 var db = mongoose.connection;
 
-
 db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', function () {
   console.log('connected');
-})
+});
 
 
 app.get('/partials/:name', function (req, res) {

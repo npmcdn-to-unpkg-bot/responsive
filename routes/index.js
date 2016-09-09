@@ -60,10 +60,10 @@ router.get('/matches', function (req, res, next) {
     userlib.getMatchList();
 });
 
-router.get('/userInfo',function(req,res,next){
-    if(req.user){
+router.get('/userInfo', function (req, res, next) {
+    if (req.user) {
         res.json(req.user);
-    }else{
+    } else {
         res.send(404);
     }
 });
