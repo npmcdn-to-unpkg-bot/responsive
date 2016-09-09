@@ -13,14 +13,14 @@
 
         function getLocations(searchText) {
             return $http({
-                url: '/locations/find/' + searchText,
+                url: '/api/locations/find/' + searchText,
                 method: 'GET'
             });
         }
 
         function registerUser(userInfo) {
             return $http({
-                url: '/user/save',
+                url: '/api/user/save',
                 method: 'POST',
                 data: { userInfo: userInfo }
             });
@@ -28,21 +28,21 @@
 
         function isNameAvailable(name) {
             return $http({
-                url: '/user/exists/' + name,
+                url: '/api/user/exists/' + name,
                 method: 'GET'
             });
         }
 
         function checkEmailExists(email) {
             return $http({
-                url: '/user/email/exists/' + email,
+                url: '/api/user/email/exists/' + email,
                 method: 'GET'
             });
         }
 
         function checkmates() {
             return $http({
-                url: '/matches',
+                url: '/api/matches',
                 method: 'GET'
             });
         }

@@ -55,7 +55,7 @@ router.get('/locations/find/:search', function (req, res, next) {
         });
 });
 
-router.get('/matches', function (req, res, next) {
+router.get('/api/matches', function (req, res, next) {
     userlib.getMatchList();
 });
 

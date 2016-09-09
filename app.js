@@ -8,7 +8,7 @@ var jwt = require('jsonwebtoken');
 var config = require('./config/config');
 var userlib = require('./lib/userlib');
 var jwtAuth = require('./lib/jwtAuth');
-
+var others = require('./routes/other')
 var routes = require('./routes/index');
 var auth = require('./routes/auth');
 var app = express();
@@ -17,7 +17,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.set('jwtSecret',config.secret);
+app.set('jwtSecret', config.secret);
 
 app.use(logger('dev'));
 //Use body parser to get POST requests for API use
@@ -33,10 +33,12 @@ app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.all ('/*',[bodyParser(), jwtAuth]);
+app.all('/api/*', [bodyParser(), jwtAuth]);
+app.all('/auth/*', [bodyParser(), jwtAuth]);
 
 require('./lib/passport')(passport);
-app.use('/', routes);
+app.use('/', others);
+app.use('/api', routes);
 app.use('/auth', auth);
 
 mongoose.connect(config.url);
