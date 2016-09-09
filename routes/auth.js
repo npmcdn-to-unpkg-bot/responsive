@@ -11,8 +11,9 @@ auth.post('/login', function (req, res, next) {
     var isAuthentic = authuser.authenticate(req.body.userName, req.body.password, function (err, user, result) {
         if (result && result == true) {
             if (user) {
-               var token= authuser.getToken(user);
-                res.json({ success: true,user: user, token: token });
+                user.password = "";
+                var token = authuser.getToken(user);
+                res.json({ success: true, user: user, token: token });
             }
         } else {
             res.json({ success: false, message: 'Invalid username or password' });

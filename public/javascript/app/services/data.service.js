@@ -10,6 +10,7 @@
         this.isNameAvailable = isNameAvailable;
         this.checkEmailExists = checkEmailExists;
         this.checkmates = checkmates;
+        this.getUserInfo = getUserInfo;
 
         function getLocations(searchText) {
             return $http({
@@ -44,6 +45,13 @@
             return $http({
                 url: '/api/matches',
                 method: 'GET'
+            });
+        }
+
+        function getUserInfo(){
+            return $http({
+                url: '/api/userInfo',
+                method:'GET'
             });
         }
     }

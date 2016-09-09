@@ -10,6 +10,7 @@
         var service = this;
         service.login = login;
         service.getToken = getToken;
+        service.signOut = signOut;
         service.isAuthenticated = isAuthenticated;
         service.user = {};
         function login(loginInfo, cb) {
@@ -40,6 +41,11 @@
             if (window.localStorage['token'])
                 return true;
             return false;
+        }
+
+        function signOut() {
+            if (window.localStorage['token'])
+                window.localStorage.removeItem('token');
         }
     }
 

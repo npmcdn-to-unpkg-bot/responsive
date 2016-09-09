@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.all('/api/*', [bodyParser(), jwtAuth]);
-app.all('/auth/*', [bodyParser(), jwtAuth]);
+//app.all('/auth/*', [bodyParser(), jwtAuth]);
 
 require('./lib/passport')(passport);
 app.use('/', others);

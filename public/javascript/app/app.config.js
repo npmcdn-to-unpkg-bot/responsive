@@ -9,8 +9,16 @@
 
         $stateProvider
             .state('login', { templateUrl: 'partials/login', controller: 'loginCtrl' });
-            
+
         $stateProvider
-            .state('register',{templateUrl:'partials/register', controller:'registerCtrl'});
+            .state('register', { templateUrl: 'partials/register', controller: 'registerCtrl' });
+
+        $stateProvider
+            .state('contact', {
+                templateUrl: 'partials/contactus', controller: function () {
+                }
+            });
+        $stateProvider
+            .state('profile', { templateUrl: 'partials/profile', controller: 'profileCtrl' });
     });
 })();

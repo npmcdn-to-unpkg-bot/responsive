@@ -5,7 +5,8 @@ var database = require('../config/config');
 var userlib = require('../lib/userlib');
 
 router.get('/', function (req, res, next) {
-    res.render('index', { title: 'Netork' });
+    console.log(Date.now());
+    next();
 });
 
 router.post('/user/save', function (req, res, next) {
@@ -55,8 +56,16 @@ router.get('/locations/find/:search', function (req, res, next) {
         });
 });
 
-router.get('/api/matches', function (req, res, next) {
+router.get('/matches', function (req, res, next) {
     userlib.getMatchList();
+});
+
+router.get('/userInfo',function(req,res,next){
+    if(req.user){
+        res.json(req.user);
+    }else{
+        res.send(404);
+    }
 });
 
 module.exports = router;

@@ -1,9 +1,9 @@
 var express = require('express');
-var router = express.Router();
+var others = express.Router();
 
-router.get('/', function (req, res, next) {
+others.get('/', function (req, res, next) {
     res.render('index', { title: 'Netork' });
 });
 
 
-module.exports = router;
+module.exports = others;
